@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Казино имени Артема</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="logotip">
+    <span class="title">Техно-Казино</span>
+  </div>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <div class="slot-machine">
+    <div class="boost-indicator" id="boostIndicator" style="display:none;"></div>
+    <div class="credits">Технобаллы: <span id="credits">100</span></div>
+    <div class="reels">
+      <div class="reel" id="reel1">🍒</div>
+      <div class="reel" id="reel2">🍋</div>
+      <div class="reel" id="reel3">🍊</div>
+      <div class="reel" id="reel4">🍉</div>
+      <div class="reel" id="reel5">🍇</div>
+    </div>
+    <button class="spin-btn" id="spinBtn">Крутить</button>
+    <div class="message" id="message"></div>
+    <button class="add-credits-btn-secondary" id="openAddCreditsModal">Додеп</button>
+    <button class="debt-btn" id="openDebtModal">Проверить задолженность</button>
+    <button class="team-btn" id="openTeamModal">О команде</button>
+    <button class="shop-btn" id="openShopModal">Магазин</button>
+  </div>
+  <div class="modal" id="addCreditsModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeAddCreditsModal" aria-label="Закрыть">×</button>
+      <div class="modal-title">оплатить яндекс 180 в кредит</div>
+      <form class="add-credits-form" id="addCreditsForm" autocomplete="off">
+        <input type="number" id="addCreditsInput" min="1" placeholder="Сколько докинуть? (до 180)" required>
+        <button type="submit" class="add-credits-btn">Додеп</button>
+      </form>
+      <div class="modal-caption">Сколько депаем?</div>
+    </div>
+  </div>
+  <div class="modal" id="debtModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeDebtModal" aria-label="Закрыть">×</button>
+      <div class="modal-title add-credits-modal-title">
+        <span class="dodep-title-blue">Додеп</span><span class="dodep-title-red">Услуги</span>
+      </div>
+      <div class="modal-debt-text" id="debtText"></div>
+    </div>
+  </div>
+  <div class="modal" id="welcomeModal">
+    <div class="modal-content">
+      <div class="modal-title" style="font-size:1.25rem; font-weight:700; text-align:center; margin-bottom:16px;">Добро пожаловать в Я-Казино!</div>
+      <div style="font-size:1.05rem; color:#444; text-align:center; margin-bottom:18px;">
+        <b>Ваша предыстория:</b><br>
+        В 2025 году Кейс БВ от яндекса запускает уникальную подписку <span style="color:#1A5AFF; font-weight:600;">Яндекс 180</span> — теперь вы можете получить ничего за 180 рублей<br><br>
+        <span style="color:#E53935; font-weight:600;">Оформите виртуальную подписку Яндекс 180</span> и получите до 180 кредитов в долг прямо сейчас.<br><br>
+      </div>
+      <button class="debt-btn" id="closeWelcomeModal" style="margin-top:8px;">Продолжить</button>
+    </div>
+  </div>
+  <div class="modal" id="teamModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeTeamModal" aria-label="Закрыть">×</button>
+      <div class="modal-title" style="text-align:center; font-size:1.18rem; font-weight:700; margin-bottom:16px;">Наша команда</div>
+      <div style="font-size:1.05rem; color:#444; text-align:center; margin-bottom:12px;">
+        <div><b>Александр</b> — разработчик</div>
+        <div><b>Артем</b> — амбасадор</div>
+        <div><b>Никита</b> — тестировщик</div>
+      </div>
+<!--       <a href="https://github.com/X200L/YAcasino" target="_blank" style="display:block; text-align:center; color:#1A5AFF; font-weight:500; text-decoration:none; margin-top:10px;">GitHub проекта</a> -->
+    </div>
+  </div>
+  <div class="modal" id="shopModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeShopModal" aria-label="Закрыть">×</button>
+      <div class="modal-title" style="text-align:center; font-size:1.18rem; font-weight:700; margin-bottom:16px;">Магазин призов</div>
+      <div class="shop-list">
+        <div class="shop-item">
+          <span class="shop-item-name">Бесплатный спин</span>
+          <span class="shop-item-price">30 кредитов</span>
+          <button class="shop-buy-btn" id="buyFreeSpin">Купить</button>
+        </div>
+        <div class="shop-item">
+          <span class="shop-item-name">VIP-статус (10 спинов)</span>
+          <span class="shop-item-price">100 кредитов</span>
+          <button class="shop-buy-btn" id="buyVip">Купить</button>
+        </div>
+        <div class="shop-item">
+          <span class="shop-item-name">Стикер "Везунчик"</span>
+          <span class="shop-item-price">60 кредитов</span>
+          <button class="shop-buy-btn" id="buySticker">Купить</button>
+        </div>
+        <div class="shop-item">
+          <span class="shop-item-name">Повышенные шансы (10 спинов)</span>
+          <span class="shop-item-price">120 кредитов</span>
+          <button class="shop-buy-btn" id="buyLuck">Купить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">
+    <span id="themeIcon">🌙</span>
+  </button>
+  <script>
+    const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '🔔', '7️⃣', '🥝', '🥥', '🍏', '🍓', '🍌', '🍍', '🥭', '🍈'];
+const reels = [
+  document.getElementById('reel1'),
+  document.getElementById('reel2'),
+  document.getElementById('reel3'),
+  document.getElementById('reel4'),
+  document.getElementById('reel5')
+];
+const spinBtn = document.getElementById('spinBtn');
+const message = document.getElementById('message');
+const creditsEl = document.getElementById('credits');
+let credits = 100;
+let spinning = false;
+let totalDeposits = 0;
+let boostSpins = 0;
+let freeSpin = false;
+let vipSpins = 0;
+let stickerSpins = 0;
+const boostIndicator = document.getElementById('boostIndicator');
+function getRandomSymbol() {
+  return symbols[Math.floor(Math.random() * symbols.length)];
+}
+function updateCredits(amount) {
+  credits += amount;
+  creditsEl.textContent = credits;
+}
+function showMessage(text, win = false) {
+  message.textContent = text;
+  message.className = 'message' + (win ? ' win' : '');
+}
+function updateBoostIndicator() {
+  let arr = [];
+  if (boostSpins > 0) arr.push(`Повышенные шансы: ${boostSpins} спинов`);
+  if (vipSpins > 0) arr.push(`VIP: ${vipSpins} спинов`);
+  if (stickerSpins > 0) arr.push('Стикер "Везунчик"');
+  boostIndicator.style.display = arr.length ? '' : 'none';
+  boostIndicator.textContent = arr.join(' | ');
+}
+function canBuy(cost) {
+  return credits >= cost;
+}
+function showShopMessage(msg) {
+  showMessage(msg, true);
+  setTimeout(() => { if (message.textContent === msg) showMessage(''); }, 1800);
+}
+function updateShopButtons() {
+  const buyLuck = document.getElementById('buyLuck');
+  if (buyLuck) buyLuck.disabled = !canBuy(120) || boostSpins > 0;
+  const buyFreeSpin = document.getElementById('buyFreeSpin');
+  if (buyFreeSpin) buyFreeSpin.disabled = !canBuy(30) || freeSpin;
+  const buyVip = document.getElementById('buyVip');
+  if (buyVip) buyVip.disabled = !canBuy(100) || vipSpins > 0;
+  const buySticker = document.getElementById('buySticker');
+  if (buySticker) buySticker.disabled = !canBuy(60) || stickerSpins > 0;
+}
+updateBoostIndicator();
+updateShopButtons();
+
+function spinReels() {
+  if (spinning || credits <= 0 && !freeSpin) return;
+  spinning = true;
+  if (freeSpin) {
+    freeSpin = false;
+  } else {
+    updateCredits(-5);
+  }
+  showMessage('Крутим...');
+  reels.forEach(r => r.classList.remove('win'));
+  let intervals = [];
+  for (let i = 0; i < 5; i++) {
+    intervals[i] = setInterval(() => {
+      reels[i].textContent = getRandomSymbol();
+    }, 60 + i * 30);
+  }
+  setTimeout(() => {
+    for (let i = 0; i < 5; i++) clearInterval(intervals[i]);
+    const result = reels.map(() => getRandomSymbol());
+    for (let i = 0; i < 5; i++) reels[i].textContent = result[i];
+    let counts = {};
+    result.forEach(sym => { counts[sym] = (counts[sym] || 0) + 1; });
+    let maxCount = Math.max(...Object.values(counts));
+    let win = false;
+    let winAmount = 0;
+    if (boostSpins > 0) {
+      if (Math.random() < 0.25) {
+        maxCount = 5;
+        for (let i = 0; i < 5; i++) result[i] = result[0];
+      } else if (Math.random() < 0.35) {
+        maxCount = 4;
+        let sym = result[0];
+        for (let i = 0; i < 4; i++) result[i] = sym;
+      } else if (Math.random() < 0.5) {
+        maxCount = 3;
+        let sym = result[0];
+        for (let i = 0; i < 3; i++) result[i] = sym;
+      }
+    }
+    if (maxCount === 5) {
+      win = true;
+      winAmount = 100;
+    } else if (maxCount === 4) {
+      win = true;
+      winAmount = 50;
+    } else if (maxCount === 3) {
+      win = true;
+      winAmount = 20;
+    } else if (maxCount === 2) {
+      win = true;
+      winAmount = 5;
+    }
+    if (win) {
+      updateCredits(winAmount);
+      reels.forEach(r => r.classList.add('win'));
+      if (maxCount === 5) {
+        reels.forEach(r => r.classList.add('jackpot'));
+        setTimeout(() => { reels.forEach(r => r.classList.remove('jackpot')); }, 1200);
+      }
+      showMessage(`Вы выиграли ${winAmount} кредитов!`, true);
+    } else {
+      showMessage('Попробуйте еще раз!');
+    }
+    if (credits <= 0 && !freeSpin) {
+      showMessage('Кредиты закончились! Обновите страницу, чтобы начать заново.');
+      spinBtn.disabled = true;
+    }
+    if (boostSpins > 0) {
+      boostSpins--;
+    }
+    if (vipSpins > 0) {
+      vipSpins--;
+    }
+    if (stickerSpins > 0) {
+      stickerSpins--;
+    }
+    updateBoostIndicator();
+    updateShopButtons();
+    spinning = false;
+  }, 1200);
+}
+spinBtn.addEventListener('click', spinReels);
+
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+if (themeToggle && themeIcon) {
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    if (document.body.classList.contains('dark')) {
+      themeIcon.textContent = '☀️';
+    } else {
+      themeIcon.textContent = '🌙';
+    }
+  });
+}
+
+const addCreditsForm = document.getElementById('addCreditsForm');
+const addCreditsInput = document.getElementById('addCreditsInput');
+const openAddCreditsModal = document.getElementById('openAddCreditsModal');
+const closeAddCreditsModal = document.getElementById('closeAddCreditsModal');
+const addCreditsModal = document.getElementById('addCreditsModal');
+if (openAddCreditsModal && closeAddCreditsModal && addCreditsModal) {
+  openAddCreditsModal.addEventListener('click', function() {
+    addCreditsModal.classList.add('active');
+    setTimeout(() => { if (addCreditsInput) addCreditsInput.focus(); }, 100);
+  });
+  closeAddCreditsModal.addEventListener('click', function() {
+    addCreditsModal.classList.remove('active');
+  });
+  addCreditsModal.addEventListener('click', function(e) {
+    if (e.target === addCreditsModal) addCreditsModal.classList.remove('active');
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') addCreditsModal.classList.remove('active');
+  });
+}
+if (addCreditsForm && addCreditsInput) {
+  addCreditsForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let value = parseInt(addCreditsInput.value, 10);
+    if (isNaN(value) || value < 1) {
+      showMessage('Введите сумму от 1 до 180');
+      return;
+    }
+    
+    updateCredits(value);
+    totalDeposits += value;
+    showMessage(`Вы докинули ${value} кредитов!`, true);
+    addCreditsInput.value = '';
+    spinBtn.disabled = false;
+    addCreditsModal.classList.remove('active');
+  });
+}
+
+const openDebtModal = document.getElementById('openDebtModal');
+const closeDebtModal = document.getElementById('closeDebtModal');
+const debtModal = document.getElementById('debtModal');
+const debtText = document.getElementById('debtText');
+if (openDebtModal && closeDebtModal && debtModal && debtText) {
+  openDebtModal.addEventListener('click', function() {
+    const debt = Math.round(totalDeposits * 1.4);
+    debtText.innerHTML = `
+      <div class='debt-card-details'>
+        <div class='debt-card-header'>Исполнительский сбор по пост. Я-казик</div>
+        <div class='debt-card-desc'>В рамках дела о виртуальном кредите.\nВ отношении пользователя казино.</div>
+        <div class='debt-card-desc'>УФК по Я-казик (виртуальный счёт)</div>
+      </div>
+      <div style='display:flex;flex-direction:column;align-items:flex-end;min-width:120px;'>
+        <div class='debt-card-amount'>${debt} BYN</div>
+        <button class='debt-pay-btn' disabled>Оплатить</button>
+      </div>
+    `;
+    debtModal.classList.add('active');
+  });
+  closeDebtModal.addEventListener('click', function() {
+    debtModal.classList.remove('active');
+  });
+  debtModal.addEventListener('click', function(e) {
+    if (e.target === debtModal) debtModal.classList.remove('active');
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') debtModal.classList.remove('active');
+  });
+}
+
+// Welcome modal logic
+const welcomeModal = document.getElementById('welcomeModal');
+const closeWelcomeModal = document.getElementById('closeWelcomeModal');
+window.addEventListener('DOMContentLoaded', function() {
+  if (welcomeModal) welcomeModal.classList.add('active');
+});
+if (closeWelcomeModal && welcomeModal) {
+  closeWelcomeModal.addEventListener('click', function() {
+    welcomeModal.classList.remove('active');
+  });
+}
+
+const teamModal = document.getElementById('teamModal');
+const openTeamModal = document.getElementById('openTeamModal');
+const closeTeamModal = document.getElementById('closeTeamModal');
+if (teamModal && openTeamModal && closeTeamModal) {
+  openTeamModal.addEventListener('click', function() {
+    teamModal.classList.add('active');
+  });
+  closeTeamModal.addEventListener('click', function() {
+    teamModal.classList.remove('active');
+  });
+  teamModal.addEventListener('click', function(e) {
+    if (e.target === teamModal) teamModal.classList.remove('active');
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') teamModal.classList.remove('active');
+  });
+}
+
+const shopModal = document.getElementById('shopModal');
+const openShopModal = document.getElementById('openShopModal');
+const closeShopModal = document.getElementById('closeShopModal');
+if (shopModal && openShopModal && closeShopModal) {
+  openShopModal.addEventListener('click', function() {
+    shopModal.classList.add('active');
+  });
+  closeShopModal.addEventListener('click', function() {
+    shopModal.classList.remove('active');
+  });
+  shopModal.addEventListener('click', function(e) {
+    if (e.target === shopModal) shopModal.classList.remove('active');
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') shopModal.classList.remove('active');
+  });
+}
+
+const buyLuck = document.getElementById('buyLuck');
+if (buyLuck) {
+  buyLuck.addEventListener('click', function() {
+    if (boostSpins > 0 || !canBuy(120)) return;
+    updateCredits(-120);
+    boostSpins = 10;
+    updateBoostIndicator();
+    updateShopButtons();
+    showShopMessage('Повышенные шансы активированы на 10 спинов!');
+  });
+}
+const buyFreeSpin = document.getElementById('buyFreeSpin');
+if (buyFreeSpin) {
+  buyFreeSpin.addEventListener('click', function() {
+    if (!canBuy(30) || freeSpin) return;
+    updateCredits(-30);
+    freeSpin = true;
+    updateBoostIndicator();
+    updateShopButtons();
+    showShopMessage('Бесплатный спин куплен! Следующий спин бесплатный.');
+  });
+}
+const buyVip = document.getElementById('buyVip');
+if (buyVip) {
+  buyVip.addEventListener('click', function() {
+    if (!canBuy(100) || vipSpins > 0) return;
+    updateCredits(-100);
+    vipSpins = 10;
+    updateBoostIndicator();
+    updateShopButtons();
+    showShopMessage('VIP-статус активирован на 10 спинов!');
+  });
+}
+const buySticker = document.getElementById('buySticker');
+if (buySticker) {
+  buySticker.addEventListener('click', function() {
+    if (!canBuy(60) || stickerSpins > 0) return;
+    updateCredits(-60);
+    stickerSpins = 10;
+    updateBoostIndicator();
+    updateShopButtons();
+    showShopMessage('Стикер "Везунчик" активирован на 10 спинов!');
+  });
+} 
+  </script>
+</body>
+</html> 
